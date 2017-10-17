@@ -11,7 +11,7 @@ public class TcpServer {
             ServerSocket serverSocket = new ServerSocket(PORT);
             Map<String, String> map = new HashMap<String, String>();
 
-            //while (true) {
+            while (true) {
                 Socket connectionSocket = serverSocket.accept();
                 BufferedReader inFromClient = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
                 DataOutputStream outToClient = new DataOutputStream(connectionSocket.getOutputStream());
@@ -34,7 +34,7 @@ public class TcpServer {
                 else {
                     outToClient.writeBytes("Invalid Command.\n");
                 }
-            //}
+            }
         }
         catch (Exception e) {
             e.printStackTrace();
