@@ -9,10 +9,10 @@ public class TcpClient {
         try {
             boolean task = true;
             String responseFromServer, userInput;
+            Socket socket = new Socket(HOST_ADDRESS, PORT);
 
             while (task) {
                 BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
-                Socket socket = new Socket(HOST_ADDRESS, PORT);
                 DataOutputStream outToServer = new DataOutputStream(socket.getOutputStream());
                 BufferedReader inFromServer = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 responseFromServer = inFromServer.readLine();
@@ -21,8 +21,8 @@ public class TcpClient {
                         || responseFromServer.equalsIgnoreCase("Please enter value.")
                         || responseFromServer.equalsIgnoreCase("Please enter key to retrieve its value.")) {
                     System.out.println(responseFromServer);
-                    userInput = inFromUser.readLine();
-                    outToServer.writeBytes(userInput + "\n");
+                    userInput = inFromUser.readLine() + "\n";
+                    outToServer.writeBytes(userInput);
                 }
                 else {
                     System.out.println(responseFromServer);
